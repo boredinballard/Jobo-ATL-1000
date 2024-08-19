@@ -1,5 +1,3 @@
-This may be niche, but for anyone with a Jobo ATL 1000 here, you may find this useful in the future. I won't go over all the programs, just the basics and info on what the hex code is doing.
-
 The ATL 1000 programs are stored on an ST M27C256B EPROM. Mine came with a M27C256B-12XFI. I currently have a M27C256B-12F1 in it. I've seen -15F1 parts in other ATL 1000 controller heads. It probably doesn't matter. I've read that someone successfully used an M27C512 EPROM and doubled the amount of programs available to them.
 
 If you would like to program your ATL 1000, you'll need a UV eraser and an EPROM programmer. I suggest getting a used or NOS eraser from eBay, not the cheap new nonsense from Amazon. It's up to you on how you want to program the EPROM, but I used a programmer from MCU Mall.
