@@ -42,7 +42,7 @@ Action codes (second digit):
 Other codes:
 
     10 - Pre-rinse
-    x1 - Moves rotary valve (?)
+    x1 - Moves rotary valve (Happens twice usually. Moves the drain from chemical drain to water/rinse drain.)
     00 - No operation
 
 For example, **20** selects **Tank 1** in the **Development** step. It may also signal the rotation start/stop. **24** begins pumping of **Tank 1**. To lift and drain on this step, the code is **22**. Each step through the process corresponds to a tank and/or step. They also correspond to a rinse or dev step, and I'm not sure if the distinction matters, but it is there. For example, in the C41 program, once you get to **Tank 2**, the code for pumping the chemicals is **44**, and lifting/draining is **42**. There are some other details in-between switching steps that I'll go over later.
@@ -62,14 +62,14 @@ Here is the next line:
 * **20** - I believe stops rotation. Still on the **Development** step of **Tank 1**.
 * **22 22 22 22 22** - Lifts the drum and drains for the **Development** step of **Tank 1**.
 * **20** - Starts rotation again, and lowers the lift. I believe the lift lowers whenever it receives any new command.
-* **21** - Still a question, but apparently moves the rotary valve.
+* **21** - Moves the rotary valve.
 * **20** - Continues to rotate.
 * **21** - Rotary valve again.
 * **20** - Continues to rotate.
 * **44 44 44 44 44** - Begines pumping from **Tank 2** in the **Development** step.
 
 
-And so on, and so on. Regarding the **Rotary valve**, I'm not sure how it works. You can hear it doing something, and the bytes of **x0 x1 x0 x1 x0** Seems to happen between every step. I also noticed that every program always runs through these rotary valve steps six times, even if only two tanks are used. It will run through them at the end of the program to if it didn't use all steps/tanks. For example, here is the end of the the two bath C41 program (7):
+And so on, and so on. Regarding the **Rotary valve**, the bytes of **x0 x1 x0 x1 x0** Seems to happen between every step. I also noticed that every program always runs through these rotary valve steps six times, even if only two tanks are used. It will run through them at the end of the program to if it didn't use all steps/tanks. For example, here is the end of the the two bath C41 program (7):
 
     52 50 60 61 60 61 80 81 80 81 A0 A1 A0 A1 C0 C1
     C0 C1 C0 E0 00 00 00 00 00 00 00 00 00 00 00 00
@@ -83,7 +83,7 @@ And so on, and so on. Regarding the **Rotary valve**, I'm not sure how it works.
 * **C0 C1 C0 C1 C0** - Same as above, but for **Tank 6** in the **Development** step.
 * **E0** - End of program.
 
-I don't know how important the rotary valve is to have go through each step, during testing I did not do that and didn't run into any issues, but I suppose I'll find out if I broke something when I attempt to actually develop film with a custom program.
+I don't know how important the rotary valve is to have go through each step, during testing I did not do that and didn't run into any issues, but to be safe, I have the rotary valve rotate activate for every tank, even if it is not used.
 
 Here's an example cleaning program that only cleans drains tanks 1-3:
 
